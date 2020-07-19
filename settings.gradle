@@ -1,0 +1,5 @@
+rootProject.name='WeasylNoC'
+include ':app'
+include ':gateway'
+include ':domain'
+include ':gateway2'
