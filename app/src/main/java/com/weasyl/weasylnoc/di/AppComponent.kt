@@ -4,6 +4,7 @@ import com.weasyl.weasylnoc.ui.activity.MainActivity
 import com.weasyl.weasylnoc.ui.activity.MainPresenter
 import com.weasyl.weasylnoc.ui.content.ContentPresenter
 import com.weasyl.weasylnoc.ui.login.LoginPresenter
+import com.weasyl.weasylnoc.ui.profile.ProfilePresenter
 import com.weasyl.weasylnoc.ui.splash.SplashPresenter
 import dagger.Component
 import javax.inject.Singleton
@@ -18,4 +19,5 @@ interface AppComponent {
     fun provideSplashPresenter(): SplashPresenter
     fun provideContentPresenter(): ContentPresenter
     fun provideLoginPresenter(): LoginPresenter
+    fun provideProfilePresenter(): ProfilePresenter
 }
