@@ -1,5 +1,9 @@
 package com.weasyl.weasylnoc.ui.splash
 
-import com.arellomobile.mvp.MvpView
+import com.weasyl.weasylnoc.ui.base.BaseView
 
-interface SplashView : MvpView
+interface SplashView : BaseView {
+    fun navigateToLoginScreen()
+    fun showErrorMessage()
+    fun navigateToContent()
+}

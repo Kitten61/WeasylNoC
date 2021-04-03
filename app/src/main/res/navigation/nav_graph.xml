@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
-
+    app:startDestination="@id/splashFragment">
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.weasyl.weasylnoc.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
+        android:id="@+id/splashFragment"
+        android:name="com.weasyl.weasylnoc.ui.splash.SplashFragment"
+        android:label="SplashFragment">
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/xml"
+            app:destination="@id/content_nav_graph.xml" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.weasyl.weasylnoc.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
+        android:id="@+id/loginFragment"
+        android:name="com.weasyl.weasylnoc.ui.login.LoginFragment"
+        android:label="LoginFragment" >
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/xml"
+            app:destination="@id/content_nav_graph.xml" />
     </fragment>
+    <include app:graph="@navigation/content_nav_graph" />
 </navigation>

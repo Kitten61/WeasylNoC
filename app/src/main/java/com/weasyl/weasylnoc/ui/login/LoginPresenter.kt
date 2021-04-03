@@ -1,38 +1,35 @@
 package com.weasyl.weasylnoc.ui.login
 
 import com.arellomobile.mvp.InjectViewState
+import com.weasyl.domain.enums.RetrofitState
 import com.weasyl.domain.gateways.AuthorizationGateway
-import com.weasyl.weasylnoc.R
-import com.weasyl.weasylnoc.Screens
+import com.weasyl.domain.usecases.authorization.AuthorizationUseCase
 import com.weasyl.weasylnoc.ui.base.BasePresenter
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.schedulers.Schedulers
-import ru.terrakok.cicerone.Router
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import java.io.IOException
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @InjectViewState
 class LoginPresenter @Inject constructor(
-    val router: Router,
-    val auhorizationGateway: AuthorizationGateway
+    private val authorizationUseCase: AuthorizationUseCase
 ) : BasePresenter<LoginView>() {
 
-    fun loginUser(apiKey: String) {
-        auhorizationGateway.login(apiKey).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread()).subscribe(
-                {
-                    viewState.saveUserData(apiKey)
-                    navigateToContent()
-                }, {
-                    viewState.showError(R.string.api_key_error)
+    fun loginUser() {
+        launch(IO) {
+            val state = authorizationUseCase.checkUser()
+            launch(Main) {
+                when (state) {
+                    is RetrofitState.OK<*> -> {
+                        viewState.navigateToContent()
+                    }
+                    is RetrofitState.Unauthorized -> viewState.showErrorMessage()
+                    else -> viewState.showErrorMessage()
                 }
-            ).addTo(compositeDisposable)
-    }
-
-
-
-    fun navigateToContent() {
-        router.navigateTo(Screens.ContentScreen())
+            }
+        }
     }
 
 }

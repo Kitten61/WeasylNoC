@@ -3,15 +3,16 @@ package com.weasyl.weasylnoc.di
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.readystatesoftware.chuck.ChuckInterceptor
 import com.weasyl.gateway.BuildConfig
+import com.weasyl.weasylnoc.network.KeyInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module(includes = [AppModule::class])
@@ -31,19 +32,21 @@ class RetrofitModule {
         }
 
         return OkHttpClient.Builder()
+            .addInterceptor(KeyInterceptor())
             .addInterceptor(loggingInterceptor)
-            .addInterceptor(ChuckInterceptor(context)) // Позволяет прямо на телефоне смотреть все запросы в отдельном приложении
+            .addInterceptor(ChuckInterceptor(context))
             .build()
     }
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
+    fun provideRetrofitWithoutRxJava(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(MoshiConverterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(okHttpClient)
             .build()
     }
+
 }

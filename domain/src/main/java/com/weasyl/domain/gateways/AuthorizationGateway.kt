@@ -1,8 +1,8 @@
 package com.weasyl.domain.gateways
 
-import com.weasyl.domain.models.UserLogonEntity
-import io.reactivex.Single
+import com.weasyl.domain.entities.UserLogonEntity
+import retrofit2.Response
 
 interface AuthorizationGateway {
-    fun login(apiKey: String): Single<UserLogonEntity>
+    suspend fun login(): Response<UserLogonEntity>
 }

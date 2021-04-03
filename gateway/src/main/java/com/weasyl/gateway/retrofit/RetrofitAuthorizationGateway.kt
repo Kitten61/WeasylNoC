@@ -1,16 +1,17 @@
 package com.weasyl.gateway.retrofit
 
 import com.weasyl.domain.gateways.AuthorizationGateway
-import com.weasyl.domain.models.UserLogonEntity
+import com.weasyl.domain.entities.UserLogonEntity
 import com.weasyl.gateway.Api
-import io.reactivex.Single
+import retrofit2.Response
 
 class RetrofitAuthorizationGateway(
     private val api: Api
 ) : AuthorizationGateway {
 
-    override fun login(apiKey: String): Single<UserLogonEntity> = api.whoAmI(apiKey)
-
-
+    override suspend fun login(): Response<UserLogonEntity> {
+        val result = api.whoAmIAsync().await()
+        return result
+    }
 
 }

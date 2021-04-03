@@ -1,13 +1,12 @@
 package com.weasyl.weasylnoc
 
 import android.app.Application
-import android.util.Log
+import android.content.Context
+import android.content.SharedPreferences
+import com.weasyl.domain.constants.SharedPreferencesConst.Companion.SHARED_PREFERENCES
 import com.weasyl.weasylnoc.di.AppComponent
 import com.weasyl.weasylnoc.di.AppModule
 import com.weasyl.weasylnoc.di.DaggerAppComponent
-import ru.terrakok.cicerone.Cicerone
-import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.Router
 
 class App : Application() {
 
@@ -17,10 +16,12 @@ class App : Application() {
             .builder()
             .appModule(AppModule(this))
             .build()
+        preferences = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
     }
 
     companion object {
         lateinit var appComponent: AppComponent
+        lateinit var preferences: SharedPreferences
     }
 
 }

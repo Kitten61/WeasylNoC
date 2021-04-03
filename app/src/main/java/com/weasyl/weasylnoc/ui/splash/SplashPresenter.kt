@@ -1,38 +1,34 @@
 package com.weasyl.weasylnoc.ui.splash
 
 import com.arellomobile.mvp.InjectViewState
-import com.weasyl.domain.gateways.AuthorizationGateway
-import com.weasyl.weasylnoc.Screens
+import com.weasyl.domain.enums.RetrofitState
+import com.weasyl.domain.usecases.authorization.AuthorizationUseCase
 import com.weasyl.weasylnoc.ui.base.BasePresenter
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.schedulers.Schedulers
-import ru.terrakok.cicerone.Router
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @InjectViewState
 class SplashPresenter @Inject constructor(
-    val router: Router,
-    val auhorizationGateway: AuthorizationGateway
-) : BasePresenter<SplashView>() {
+    private val authorizationUseCase: AuthorizationUseCase
+) : BasePresenter<SplashView>(), CoroutineScope {
 
-    fun loginUser(apiKey: String) {
-        auhorizationGateway.login(apiKey).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread()).subscribe(
-                {
-                    navigateToContentScreen()
-                }, {
-                    navigateToLoginScreen()
+    fun loginUser() {
+        viewModelScope.launch(IO) {
+            val state = authorizationUseCase.checkUser()
+            launch(Main) {
+                when (state) {
+                    is RetrofitState.OK<*> -> viewState.navigateToContent()
+                    is RetrofitState.Unauthorized -> viewState.navigateToLoginScreen()
+                    else -> viewState.showErrorMessage()
                 }
-            ).addTo(compositeDisposable)
-    }
-
-    fun navigateToLoginScreen() {
-        router.navigateTo(Screens.LoginScreen())
-    }
-
-    fun navigateToContentScreen() {
-        router.navigateTo(Screens.ContentScreen())
+            }
+        }
     }
 
 }
