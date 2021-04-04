@@ -7,8 +7,6 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.flexbox.FlexboxLayout
-import com.google.android.flexbox.FlexboxLayoutManager
 import com.squareup.picasso.Picasso
 import com.weasyl.domain.constants.Constants.EXPLICIT
 import com.weasyl.domain.constants.Constants.GENERAL
@@ -18,7 +16,10 @@ import com.weasyl.weasylnoc.R
 import com.weasyl.weasylnoc.ui.submissions.adapters.SubmissionsAdapter
 import kotlinx.android.synthetic.main.item_submission.view.*
 
-class SubmissionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class SubmissionsViewHolder(
+    itemView: View,
+    private val callback: SubmissionsAdapter.Callback
+) : RecyclerView.ViewHolder(itemView) {
     lateinit var submissionEntity: SubmissionEntity
 
     fun bind(
@@ -72,7 +73,11 @@ class SubmissionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
 
     private fun bindSubmission() {
         with(itemView) {
-            Picasso.get().load(submissionEntity.media.cover[0].url).placeholder(R.drawable.placeholder).into(ivSubmission)
+            Picasso.get().load(submissionEntity.media.cover[0].url)
+                .placeholder(R.drawable.placeholder).into(ivSubmission)
+            itemView.ivSubmission.setOnClickListener {
+                callback.onItemClicked(submissionEntity.id, submissionEntity.media.cover[0].url)
+            }
         }
     }
 

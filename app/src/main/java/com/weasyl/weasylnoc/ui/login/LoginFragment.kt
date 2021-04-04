@@ -1,17 +1,15 @@
 package com.weasyl.weasylnoc.ui.login
 
 import android.content.Context
-import android.os.Bundle
-import android.view.View
+import android.content.Intent
 import androidx.appcompat.app.AlertDialog
-import androidx.navigation.fragment.findNavController
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.weasyl.domain.constants.SharedPreferencesConst.Companion.API_KEY
-import com.weasyl.domain.constants.SharedPreferencesConst.Companion.SHARED_PREFERENCES
+import com.weasyl.domain.constants.SharedPreferencesConst
 import com.weasyl.weasylnoc.App
 import com.weasyl.weasylnoc.R
 import com.weasyl.weasylnoc.ui.activity.MainActivity
+import com.weasyl.weasylnoc.ui.auth.AuthActivity
 import com.weasyl.weasylnoc.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -23,26 +21,32 @@ class LoginFragment : BaseFragment(), LoginView {
     @ProvidePresenter
     fun providePresenter() = App.appComponent.provideLoginPresenter()
 
-    override val layoutId: Int = R.layout.fragment_login
+    override val layoutId = R.layout.fragment_login
 
     override fun setUpListeners() {
-        requireActivity().getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE).edit()
-            .putString(
-                API_KEY,
-                apiKeyEditText.text.toString()
-            ).apply()
         apiKeyButton.setOnClickListener {
+            requireActivity().getSharedPreferences(
+                SharedPreferencesConst.SHARED_PREFERENCES,
+                Context.MODE_PRIVATE
+            ).edit()
+                .putString(
+                    SharedPreferencesConst.API_KEY,
+                    apiKeyEditText.text.toString()
+                ).apply()
             presenter.loginUser()
         }
     }
 
     override fun navigateToContent() {
-        (activity as MainActivity).setBottomNavigationVisible(true)
-        findNavController().navigate(R.id.xml)
+        requireActivity().startActivity(
+            Intent(requireContext(), MainActivity::class.java)
+        )
+        requireActivity().finish()
     }
 
     override fun showErrorMessage() {
         AlertDialog.Builder(requireContext()).setTitle(R.string.error)
             .setMessage(R.string.connection_error_message).show()
     }
+
 }

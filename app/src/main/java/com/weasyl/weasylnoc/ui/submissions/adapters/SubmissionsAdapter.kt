@@ -7,7 +7,13 @@ import com.weasyl.domain.entities.SubmissionEntity
 import com.weasyl.weasylnoc.R
 import com.weasyl.weasylnoc.ui.submissions.view_holders.SubmissionsViewHolder
 
-class SubmissionsAdapter : RecyclerView.Adapter<SubmissionsViewHolder>() {
+class SubmissionsAdapter(
+    private val callback: Callback
+) : RecyclerView.Adapter<SubmissionsViewHolder>() {
+
+    interface Callback {
+        fun onItemClicked(id: Int, url: String)
+    }
 
     private var items = ArrayList<SubmissionEntity>()
     var onClickListener: OnClickListener? = null
@@ -15,7 +21,8 @@ class SubmissionsAdapter : RecyclerView.Adapter<SubmissionsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubmissionsViewHolder =
         SubmissionsViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_submission, parent, false)
+                .inflate(R.layout.item_submission, parent, false),
+            callback
         )
 
     override fun getItemCount(): Int = items.size

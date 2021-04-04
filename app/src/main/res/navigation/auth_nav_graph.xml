@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.weasyl.weasylnoc.ui.splash.SplashFragment"
+        android:label="SplashFragment">
+        <action
+            android:id="@+id/openLoginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.weasyl.weasylnoc.ui.login.LoginFragment"
+        android:label="LoginFragment"/>
+</navigation>

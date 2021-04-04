@@ -2,20 +2,25 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/content_nav_graph.xml"
-    app:startDestination="@id/profileFragment">
+    app:startDestination="@id/nav_profile">
 
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.weasyl.weasylnoc.ui.profile.ProfileFragment"
+    <keep_state_fragment
+        android:id="@+id/nav_profile"
+        android:name="com.weasyl.weasylnoc.ui.containers.ProfileContainer"
         android:label="ProfileFragment" />
 
-    <fragment
-        android:id="@+id/submissionsFragment"
-        android:name="com.weasyl.weasylnoc.ui.profile.ProfileFragment"
+    <keep_state_fragment
+        android:id="@+id/nav_submissions"
+        android:name="com.weasyl.weasylnoc.ui.containers.ProfileContainer"
         android:label="SubmissionsFragment" />
 
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.weasyl.weasylnoc.ui.profile.ProfileFragment"
+    <keep_state_fragment
+        android:id="@+id/nav_settings"
+        android:name="com.weasyl.weasylnoc.ui.containers.ProfileContainer"
         android:label="SettingsFragment" />
+
+    <activity
+        android:id="@+id/authorizationActivity"
+        android:name="com.weasyl.weasylnoc.ui.auth.AuthActivity" />
+
 </navigation>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/profileFragment"
+    android:id="@+id/profile_navigation_graph.xml">
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.weasyl.weasylnoc.ui.profile.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_submissionFragment"
+            app:destination="@id/submissionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/submissionFragment"
+        android:name="com.weasyl.weasylnoc.ui.submission.SubmissionFragment"
+        android:label="SubmissionFragment" >
+        <action
+            android:id="@+id/action_submissionFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+
+</navigation>

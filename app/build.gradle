@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 
 android {
@@ -93,5 +94,8 @@ dependencies {
 
     //FlexBox
     implementation 'com.google.android:flexbox:2.0.1'
+
+    // ImageViewer
+    implementation 'com.github.stfalcon:stfalcon-imageviewer:1.0.1'
 
 }

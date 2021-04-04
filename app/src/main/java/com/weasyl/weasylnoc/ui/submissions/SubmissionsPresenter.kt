@@ -28,7 +28,7 @@ class SubmissionsPresenter @Inject constructor(
         limit: Int
     ): PaginationResponseEntity<SubmissionEntity> {
         currentUser = userDataUseCase.getCurrentUser()!!
-        return submissionsUseCase.getSubmissions("fluff-kevlar", nextId = nextId!!)
+        return submissionsUseCase.getSubmissions("fluffkevlar", nextId = nextId!!)
     }
 
 }

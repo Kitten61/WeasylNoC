@@ -1,19 +1,17 @@
 package com.weasyl.weasylnoc.ui.splash
 
-import android.content.Context
 import android.content.DialogInterface
-import android.os.Bundle
-import android.view.View
+import android.content.Intent
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.findNavController
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.weasyl.domain.constants.SharedPreferencesConst.Companion.API_KEY
-import com.weasyl.domain.constants.SharedPreferencesConst.Companion.SHARED_PREFERENCES
 import com.weasyl.weasylnoc.App
 import com.weasyl.weasylnoc.R
 import com.weasyl.weasylnoc.ui.activity.MainActivity
 import com.weasyl.weasylnoc.ui.base.BaseFragment
+import com.weasyl.weasylnoc.ui.login.LoginFragment
 
 class SplashFragment : BaseFragment(), SplashView {
 
@@ -25,12 +23,8 @@ class SplashFragment : BaseFragment(), SplashView {
 
     override val layoutId: Int = R.layout.fragment_splash
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        presenter.loginUser()
-    }
-
     override fun navigateToLoginScreen() {
-        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+        SplashFragmentDirections.openLoginFragment().let(findNavController()::navigate)
     }
 
     override fun showErrorMessage() {
@@ -44,7 +38,9 @@ class SplashFragment : BaseFragment(), SplashView {
     }
 
     override fun navigateToContent() {
-        (activity as MainActivity).setBottomNavigationVisible(true)
-        findNavController().navigate(R.id.xml)
+        requireActivity().startActivity(
+            Intent(requireContext(), MainActivity::class.java)
+        )
+        requireActivity().finish()
     }
 }

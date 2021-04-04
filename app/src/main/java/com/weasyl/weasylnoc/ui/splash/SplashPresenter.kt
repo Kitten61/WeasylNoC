@@ -18,6 +18,10 @@ class SplashPresenter @Inject constructor(
     private val authorizationUseCase: AuthorizationUseCase
 ) : BasePresenter<SplashView>(), CoroutineScope {
 
+    override fun onFirstViewAttach() {
+        loginUser()
+    }
+
     fun loginUser() {
         viewModelScope.launch(IO) {
             val state = authorizationUseCase.checkUser()

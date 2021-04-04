@@ -18,10 +18,10 @@ interface BasePaginationView<I> : BaseView {
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun hidePaginationLoader()
 
-    @StateStrategyType(OneExecutionStateStrategy::class)
+    @StateStrategyType(AddToEndSingleStrategy::class)
     fun showNewItems(items: ArrayList<I>)
 
-    @StateStrategyType(OneExecutionStateStrategy::class)
+    @StateStrategyType(AddToEndSingleStrategy::class)
     fun showInitialItems(items: ArrayList<I>)
 
 }
