@@ -8,5 +8,6 @@ interface UserDataUseCase {
     suspend fun getUserData(username: String) : UserEntity?
     suspend fun getCurrentUser() : UserLogonEntity?
     suspend fun getSelfUserData() : UserEntity?
+    suspend fun getUserId(username: String?): Int
 
 }

@@ -22,5 +22,9 @@ class UserDataUseCaseImp(
         return getUserData(getCurrentUser()?.login.toString())
     }
 
+    override suspend fun getUserId(username: String?): Int {
+        return userDataGateway.getUserId(username)
+    }
+
 
 }

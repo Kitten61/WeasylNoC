@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.arellomobile.mvp.MvpAppCompatFragment
 
 abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
@@ -12,7 +13,7 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
     abstract val layoutId: Int
     open var isToolbarNeed = true
     open var toolbarLayoutId: Int = -1
-    var toolbar: View? = null
+    open var toolbar: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +42,10 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
 
     override fun showError(message: Int) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun navigateToPreviousScene() {
+        findNavController().popBackStack()
     }
 
     open fun setUpAdapters() {

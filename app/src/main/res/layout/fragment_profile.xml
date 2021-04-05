@@ -2,8 +2,8 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/cl"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     android:orientation="vertical">
@@ -14,8 +14,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!--        <CollapsingToolbarLayout app:layout_scrollFlags="scroll|snap" />-->
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clProfile"
@@ -25,17 +23,15 @@
             android:gravity="center_horizontal"
             app:layout_scrollFlags="scroll|snap">
 
-
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivBanner"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
-                android:background="@color/colorAccent"
                 app:layout_constrainedHeight="true"
-                app:layout_constraintVertical_chainStyle="spread_inside"
+                app:layout_constraintBottom_toTopOf="@id/ivBackground"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/ivBackground"/>
+                app:layout_constraintVertical_chainStyle="spread_inside" />
 
             <View
                 android:id="@+id/ivBackground"
@@ -46,10 +42,10 @@
                 app:layout_constraintTop_toBottomOf="@id/ivBanner" />
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_marginTop="40dp"
                 android:id="@+id/cvAvatar"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:layout_marginTop="40dp"
                 android:backgroundTint="@color/colorBackground"
                 app:cardCornerRadius="40dp"
                 app:layout_constraintBottom_toTopOf="@id/tvUsername"
@@ -70,9 +66,9 @@
                 android:id="@+id/tvUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/colorAccent"
                 android:textSize="20sp"
-                android:layout_marginTop="5dp"
                 app:layout_constraintBottom_toTopOf="@id/tvName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -80,10 +76,10 @@
                 tools:text="Username" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginBottom="10dp"
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:textColor="@color/colorLightGray"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"

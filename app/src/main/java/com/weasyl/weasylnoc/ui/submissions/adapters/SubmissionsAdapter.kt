@@ -12,11 +12,10 @@ class SubmissionsAdapter(
 ) : RecyclerView.Adapter<SubmissionsViewHolder>() {
 
     interface Callback {
-        fun onItemClicked(id: Int, url: String)
+        fun onItemClicked(id: Int)
     }
 
     private var items = ArrayList<SubmissionEntity>()
-    var onClickListener: OnClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubmissionsViewHolder =
         SubmissionsViewHolder(
@@ -28,7 +27,7 @@ class SubmissionsAdapter(
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: SubmissionsViewHolder, position: Int) {
-        holder.bind(items[position], onClickListener)
+        holder.bind(items[position])
     }
 
     fun addItems(items: ArrayList<SubmissionEntity>) {
@@ -36,7 +35,4 @@ class SubmissionsAdapter(
         notifyItemRangeInserted(this.items.size - items.size, items.size)
     }
 
-    interface OnClickListener {
-
-    }
 }

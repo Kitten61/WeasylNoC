@@ -26,6 +26,7 @@ abstract class BaseActivity : MvpAppCompatActivity(), BaseView {
             supportActionBar?.hide()
             return
         }
+
         supportActionBar?.show()
         supportActionBar?.apply {
             displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
@@ -39,14 +40,18 @@ abstract class BaseActivity : MvpAppCompatActivity(), BaseView {
             )
             elevation = 0f
         }
-        //val toolbar = view.parent as Toolbar
-        //toolbar.setContentInsetsAbsolute(0, 0)
+        val toolbar = view.parent as Toolbar
+        toolbar.setContentInsetsAbsolute(0, 0)
     }
 
     open fun setUpListeners() {}
 
     override fun showError(message: Int) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun navigateToPreviousScene() {
+        finish()
     }
 
 }

@@ -1,6 +1,7 @@
 package com.weasyl.weasylnoc.ui.submissions
 
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -14,13 +15,16 @@ import com.weasyl.weasylnoc.ui.base.BasePaginationPresenter
 import com.weasyl.weasylnoc.ui.submissions.adapters.SubmissionsAdapter
 import kotlinx.android.synthetic.main.fragment_pagination.*
 
-class SubmissionsFragment : BasePaginationFragment<SubmissionEntity>(), SubmissionsView<SubmissionEntity> {
+class SubmissionsFragment : BasePaginationFragment<SubmissionEntity>(),
+    SubmissionsView<SubmissionEntity> {
 
     interface Callback {
-        fun onSubmissionClicked(id: Int, url: String)
+        fun onSubmissionClicked(id: Int)
     }
 
     var callback: Callback? = null
+    var username: String? = null
+
     private lateinit var submissionsAdapter: SubmissionsAdapter
     private lateinit var itemsAdapter: ConcatAdapter
 
@@ -32,6 +36,11 @@ class SubmissionsFragment : BasePaginationFragment<SubmissionEntity>(), Submissi
     @ProvidePresenter
     fun providePresenter() = App.appComponent.provideSubmissionsPresenter()
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        presenter.username = username
+    }
+
     override fun setUpRecyclerViews() {
         with(rvContent) {
             adapter = itemsAdapter
@@ -42,8 +51,8 @@ class SubmissionsFragment : BasePaginationFragment<SubmissionEntity>(), Submissi
     override fun setUpAdapters() {
         submissionsAdapter = SubmissionsAdapter(
             object : SubmissionsAdapter.Callback {
-                override fun onItemClicked(id: Int, url: String) {
-                    callback?.onSubmissionClicked(id, url)
+                override fun onItemClicked(id: Int) {
+                    callback?.onSubmissionClicked(id)
                 }
             }
         )

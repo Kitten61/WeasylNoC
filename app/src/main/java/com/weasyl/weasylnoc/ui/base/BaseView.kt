@@ -8,4 +8,8 @@ interface BaseView : MvpView {
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun showError(message: Int)
+
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun navigateToPreviousScene()
+
 }

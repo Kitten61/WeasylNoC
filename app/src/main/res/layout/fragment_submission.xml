@@ -1,15 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <androidx.appcompat.widget.AppCompatImageView
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/ivSubmission"
+    android:background="@color/colorBackground"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSubmission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="32dp"
+            android:adjustViewBounds="true"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="@color/colorBlackTransparent"
+            android:elevation="1dp"
+            android:paddingHorizontal="7dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                tools:text="Post by Username" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                tools:text="G" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorDarkGray"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            app:layout_constraintTop_toBottomOf="@id/ivSubmission">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvAvatar"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/colorBackground"
+                app:cardCornerRadius="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/colorAccent"
+                app:strokeWidth="1dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivAvatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toTopOf="@id/tvTime"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cvAvatar"
+                app:layout_constraintTop_toTopOf="@id/cvAvatar"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="Kitten61" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/colorGray"
+                android:textSize="14sp"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="@id/cvAvatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cvAvatar"
+                app:layout_constraintTop_toBottomOf="@id/tvName"
+                tools:text="26 August 2020 at 15:04:30 MDT" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

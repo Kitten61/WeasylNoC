@@ -14,4 +14,13 @@ class SubmissionUseCaseImpl(
         nextId: Int
     ): PaginationResponseEntity<SubmissionEntity> = submissionsGateway.getUserGalleryAsync(username, nextId).await().body()!!
 
+    override suspend fun getFavoriteSubmissions(
+        userId: Int,
+        nextId: Int
+    ): PaginationResponseEntity<SubmissionEntity> = submissionsGateway.getUserFavoritesAsync(userId, nextId)
+
+    override suspend fun getSubmission(
+        submitId: Int
+    ): SubmissionEntity = submissionsGateway.getSubmissionInfoAsync(submitId).await().body()!!
+
 }

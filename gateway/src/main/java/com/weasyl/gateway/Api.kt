@@ -17,7 +17,7 @@ interface Api {
     @GET("/api/whoami")
     fun whoAmIAsync(): Deferred<Response<UserLogonEntity>>
 
-    @GET("/api/users/{username}}/view")
+    @GET("/api/users/{username}/view")
     fun getUserAsync(@Path("username") username: String): Deferred<Response<UserEntity>>
 
     @GET("/api/users/{username}/gallery")
@@ -26,6 +26,11 @@ interface Api {
         @Query("count") count: Int = COUNT_PER_PAGE,
         @Query("nextid") nextId: Int?
     ): Deferred<Response<PaginationResponseEntity<SubmissionEntity>>>
+
+    @GET("/api/submissions/{submitId}/view")
+    fun getSubmissionAsync(
+        @Path("submitId") submitId: Int
+    ): Deferred<Response<SubmissionEntity>>
 
     @POST("/api/submissions/{submitid}/favorite")
     fun setFavAsync(

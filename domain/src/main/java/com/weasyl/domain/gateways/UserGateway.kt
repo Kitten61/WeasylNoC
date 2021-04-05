@@ -11,4 +11,6 @@ interface UserGateway {
 
     suspend fun getCurrentUserAsync() : Deferred<Response<UserLogonEntity>>
 
+    suspend fun getUserId(username: String?): Int
+
 }

@@ -11,6 +11,11 @@
         <action
             android:id="@+id/action_profileFragment_to_submissionFragment"
             app:destination="@id/submissionFragment" />
+        <argument
+            android:name="username"
+            app:argType="string"
+            android:defaultValue="@null"
+            app:nullable="true" />
     </fragment>
 
     <fragment
@@ -20,6 +25,9 @@
         <action
             android:id="@+id/action_submissionFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <argument
+            android:name="submitId"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

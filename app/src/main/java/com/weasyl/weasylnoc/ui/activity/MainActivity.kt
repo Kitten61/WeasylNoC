@@ -56,20 +56,11 @@ class MainActivity : BaseActivity(), MainView {
         super.onCreate(savedInstanceState)
         initKeepStateNavigator()
         setUpNavigationBar()
-        setupActionBar()
     }
 
     private fun setUpNavigationBar() {
         bottomNavigationView.setupWithNavController(navController)
         bottomNavigationView.setOnNavigationItemReselectedListener(navigationItemReselectedListener)
-    }
-
-    private fun setupActionBar() {
-        supportActionBar?.apply {
-            displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-            setDisplayShowCustomEnabled(true)
-            setCustomView(R.layout.toolbar)
-        }
     }
 
     fun setBottomNavigationVisible(isVisible: Boolean) {

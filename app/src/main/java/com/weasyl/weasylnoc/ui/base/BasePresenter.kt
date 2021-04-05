@@ -19,4 +19,8 @@ abstract class BasePresenter<T: BaseView> : MvpPresenter<T>(), CoroutineScope{
         viewModelScope.cancel()
     }
 
+    open fun onBtnBackClicked() {
+        viewState.navigateToPreviousScene()
+    }
+
 }

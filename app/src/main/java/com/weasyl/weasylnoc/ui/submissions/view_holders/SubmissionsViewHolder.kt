@@ -23,8 +23,7 @@ class SubmissionsViewHolder(
     lateinit var submissionEntity: SubmissionEntity
 
     fun bind(
-        submissionEntity: SubmissionEntity,
-        onClickListener: SubmissionsAdapter.OnClickListener?
+        submissionEntity: SubmissionEntity
     ) {
         this.submissionEntity = submissionEntity
         bindSubmission()
@@ -76,7 +75,7 @@ class SubmissionsViewHolder(
             Picasso.get().load(submissionEntity.media.cover[0].url)
                 .placeholder(R.drawable.placeholder).into(ivSubmission)
             itemView.ivSubmission.setOnClickListener {
-                callback.onItemClicked(submissionEntity.id, submissionEntity.media.cover[0].url)
+                callback.onItemClicked(submissionEntity.id)
             }
         }
     }
